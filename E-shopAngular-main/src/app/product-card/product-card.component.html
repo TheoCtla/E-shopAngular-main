@@ -1,0 +1,29 @@
+<mat-card class="cards">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{ myProduct.title | uppercase }}</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <img [src]="myProduct.imageUrl" width="100" />
+    <p>{{ myProduct.description }}</p>
+    <button
+      mat-raised-button
+      *ngFor="let size of myProduct.sizes"
+      (click)="updateSelectedSize(size.taille, size.price)">
+      {{ size.taille }}
+    </button>
+    <div *ngIf="selectedSize">
+      Le prix pour la taille {{ selectedSize }} est :
+      {{ selectedPrice | currency : 'EUR' }}
+    </div>
+
+    <div>date d'ajout : {{ myProduct.date | date : 'mediumDate' }}</div>
+    <p>
+      <b [ngStyle]="{ color: myProduct.likes > 0 ? 'green' : 'red' }"
+        >{{ myProduct.likes }} ❤️</b
+      >
+      <button (click)="onAddLike()">Like</button>
+    </p>
+  </mat-card-content>
+</mat-card>
